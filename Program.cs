@@ -17,7 +17,7 @@ var browserPathOption = new Option<string?>(
     () => null,
     "Browser path (defaults to the bundled browser)");
 
-var rootCommand = new RootCommand("Solves today's Wordle")
+var rootCommand = new RootCommand("Solves Squaredle puzzles")
 {
     urlOption,
     browserNameOption,
