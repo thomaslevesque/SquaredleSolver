@@ -15,7 +15,7 @@
 
         public bool ContainsWord(string text)
         {
-            return GetDescendantNode(text) is Trie { HasValue: true };
+            return GetDescendantNode(text) is { HasValue: true };
         }
 
         public void Add(string text)
@@ -68,32 +68,6 @@
             }
             return childNode;
         }
-
-        public IEnumerable<Trie> EnumerateNodes()
-        {
-            if (_children is null)
-                yield break;
-
-            var queue = new LinkedList<Trie>();
-            queue.AddLast(this);
-            while (queue.Count > 0)
-            {
-                var current = queue.First!.Value;
-                queue.RemoveFirst();
-                yield return current;
-
-                if (current._children is not null)
-                {
-                    foreach (var child in _children)
-                    {
-                        queue.AddLast(child.Value);
-                    }
-                }
-            }
-        }
-
-        public int GetWordCount() => EnumerateNodes().Count(n => n.HasValue);
-        public int GetNodeCount() => EnumerateNodes().Count();
 
         public (int Nodes, int Words) GetCount()
         {
